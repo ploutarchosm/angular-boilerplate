@@ -1,0 +1,18 @@
+// Vendors
+@import './vendors/_fonts';
+@import './vendors/_reset';
+
+// Themes
+@import './themes/_root';
+@import './themes/_light';
+@import './themes/_dark';
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+a {
+    color: var(--primary);
+}

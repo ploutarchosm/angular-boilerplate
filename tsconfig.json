@@ -23,6 +23,7 @@
     ],
     "paths": {
       "@app/*": ["app/*"],
+      "@storage/*": ["app/modules/storage/*"],
       "@env/*": ["environments/*"]
     }
   },
