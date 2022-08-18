@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { SessionStoreService } from '@storage/services/session-store.service';
-import { STORE_PREFIX } from '../models/storage.token';
+import { STORE_PREFIX } from '@storage/models/storage.token';
 
 describe('SessionStoreService', () => {
   let service: SessionStoreService;

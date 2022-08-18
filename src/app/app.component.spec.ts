@@ -4,6 +4,8 @@ import { AppComponent } from '@app/app.component';
 import { StorageModule } from '@storage/storage.module';
 import { LocalStoreService } from '@storage/services/local-store.service';
 import { SessionStoreService } from '@storage/services/session-store.service';
+import { STORE_PREFIX } from '@storage/models/storage.token';
+import { THEME_PREFIX } from '@theme/models/theme.token';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -13,6 +15,16 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, StorageModule.forRoot()],
       declarations: [AppComponent],
+      providers: [
+        {
+          provide: STORE_PREFIX,
+          useValue: 'pm.',
+        },
+        {
+          provide: THEME_PREFIX,
+          useValue: 'light',
+        },
+      ],
     }).compileComponents();
 
     localStorage = TestBed.inject(LocalStoreService);
@@ -37,13 +49,7 @@ describe('AppComponent', () => {
     expect(testKey).toBe('testValue');
   });
 
-  it('should set localSession key `testKey` and value `testValue`', () => {
-    localStorage.setItem('testKey', 'testValue');
-    const testKey = localStorage.getItem('testKey');
-    expect(testKey).toBe('testValue');
-  });
-
-  it('Should set localSession key ``', () => {
+  it('Should set sessionStorage key `testKey` and value `testValue`', () => {
     sessionStorage.setItem('testKey', 'testValue');
     const testKey = sessionStorage.getItem('testKey');
     expect(testKey).toBe('testValue');

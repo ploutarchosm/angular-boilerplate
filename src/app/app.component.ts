@@ -1,33 +1,30 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ThemeService } from '@app/services/theme.service';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { LocalStoreService } from '@storage/services/local-store.service';
-import { Theme } from './interfaces/theme';
+import { ThemeService } from '@theme/services/theme.service';
+import { combineLatest, Observable, of, first } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
   title = 'angular-boilerplate';
-  subscription = new Subscription();
+  merge$: Observable<[string | undefined, string]>;
 
-  constructor(
-    private themeService: ThemeService,
-    private localStorageService: LocalStoreService
-  ) {}
+  constructor(localStorage: LocalStoreService, themeService: ThemeService) {
+    const currentTheme$ = of(localStorage.get('theme')); // if theme is setup to the localStorage
+    const defaultTheme$ = themeService.theme$; // get default theme
+    this.merge$ = combineLatest([currentTheme$, defaultTheme$]);
+  }
 
   ngOnInit(): void {
-    // this.themeService.changeTheme({ name: 'Dark', data: 'dark' });
-    this.subscription.add(
-      this.themeService.theme$.subscribe(defaultTheme => {
-        this.localStorageService.set('theme', defaultTheme);
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    console.log('Setup theme to the dom at init');
+    /**
+     *
+     * Setup theme to the DOM here
+     */
   }
 }
+
+// .subscribe(([c, d]) => !c && localStorage.set('theme', d));

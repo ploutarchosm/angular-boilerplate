@@ -1,22 +1,19 @@
-import { Renderer2 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { ThemeService } from '@app/services/theme.service';
+import { ThemeService } from '@app/modules/theme/services/theme.service';
+import { THEME_PREFIX } from '@theme/models/theme.token';
 
 describe('ThemeService', () => {
   let service: ThemeService;
-  let renderer: Renderer2;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [Renderer2],
+      providers: [ThemeService, { provide: THEME_PREFIX, useValue: 'light' }],
     }).compileComponents();
     service = TestBed.inject(ThemeService);
-    renderer = TestBed.inject(Renderer2);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
-    expect(renderer).toBeTruthy();
   });
 
   it('should set Dark Theme', () => {

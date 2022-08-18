@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { LocalStoreService } from '@storage/services/local-store.service';
-import { STORE_PREFIX } from '../models/storage.token';
+import { STORE_PREFIX } from '@storage/models/storage.token';
 
 describe('LocalStoreService', () => {
   let service: LocalStoreService;
