@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalStoreService } from '@storage/services/local-store.service';
+import { ThemeStorageService } from '@shared/services/theme-storage.service';
 import { ThemeService } from '@theme/services/theme.service';
-import { combineLatest, Observable, of, first } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,21 +9,15 @@ import { combineLatest, Observable, of, first } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   title = 'angular-boilerplate';
-  merge$: Observable<[string | undefined, string]>;
 
-  constructor(localStorage: LocalStoreService, themeService: ThemeService) {
-    const currentTheme$ = of(localStorage.get('theme')); // if theme is setup to the localStorage
-    const defaultTheme$ = themeService.theme$; // get default theme
-    this.merge$ = combineLatest([currentTheme$, defaultTheme$]);
-  }
+  constructor(
+    private themeStorageService: ThemeStorageService,
+    private themeService: ThemeService
+  ) {}
 
   ngOnInit(): void {
-    console.log('Setup theme to the dom at init');
-    /**
-     *
-     * Setup theme to the DOM here
-     */
+    this.themeService.theme$.subscribe({
+      next: val => this.themeStorageService.setTheme(val),
+    });
   }
 }
-
-// .subscribe(([c, d]) => !c && localStorage.set('theme', d));

@@ -6,6 +6,7 @@ import { LocalStoreService } from '@storage/services/local-store.service';
 import { SessionStoreService } from '@storage/services/session-store.service';
 import { STORE_PREFIX } from '@storage/models/storage.token';
 import { THEME_PREFIX } from '@theme/models/theme.token';
+import { SharedModule } from '@shared/shared.module';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -13,7 +14,7 @@ describe('AppComponent', () => {
     let sessionStorage: SessionStoreService;
 
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, StorageModule.forRoot()],
+      imports: [RouterTestingModule, StorageModule.forRoot(), SharedModule],
       declarations: [AppComponent],
       providers: [
         {
