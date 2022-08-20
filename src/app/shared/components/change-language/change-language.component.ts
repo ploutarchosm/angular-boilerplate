@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LanguageService } from '@shared/services/language.service';
 
 @Component({
   selector: 'app-change-language',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./change-language.component.scss'],
 })
 export class ChangeLanguageComponent {
-  constructor() {}
+  selectedLanguge!: string;
+
+  constructor(private languageService: LanguageService) {
+    this.selectedLanguge = this.languageService.languageValue;
+  }
+
+  onChange(val: string) {
+    this.languageService.changeLanguage(val);
+  }
 }

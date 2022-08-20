@@ -7,6 +7,8 @@ import { SessionStoreService } from '@storage/services/session-store.service';
 import { STORE_PREFIX } from '@storage/models/storage.token';
 import { THEME_PREFIX } from '@theme/models/theme.token';
 import { SharedModule } from '@shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { LANGUAGE_PREFIX } from '@shared/models/language.token';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -14,7 +16,12 @@ describe('AppComponent', () => {
     let sessionStorage: SessionStoreService;
 
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, StorageModule.forRoot(), SharedModule],
+      imports: [
+        RouterTestingModule,
+        TranslateModule.forRoot(),
+        StorageModule.forRoot(),
+        SharedModule,
+      ],
       declarations: [AppComponent],
       providers: [
         {
@@ -24,6 +31,10 @@ describe('AppComponent', () => {
         {
           provide: THEME_PREFIX,
           useValue: 'light',
+        },
+        {
+          provide: LANGUAGE_PREFIX,
+          useValue: 'en',
         },
       ],
     }).compileComponents();

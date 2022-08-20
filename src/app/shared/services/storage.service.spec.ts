@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { STORE_PREFIX } from '@storage/models/storage.token';
 import { THEME_PREFIX } from '@theme/models/theme.token';
-import { ThemeStorageService } from '@shared/services/theme-storage.service';
+import { StorageService } from '@app/shared/services/storage.service';
+import { TranslateModule } from '@ngx-translate/core';
 
-describe('ThemeStorageService', () => {
-  let service: ThemeStorageService;
+describe('StorageService', () => {
+  let service: StorageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot()],
       providers: [
         {
           provide: STORE_PREFIX,
@@ -19,7 +21,7 @@ describe('ThemeStorageService', () => {
         },
       ],
     });
-    service = TestBed.inject(ThemeStorageService);
+    service = TestBed.inject(StorageService);
   });
 
   it('should be created', () => {

@@ -1,1 +1,4 @@
-<p>change-language works!</p>
+<select [(ngModel)]="selectedLanguge" (ngModelChange)="onChange($event)">
+  <option [value]="'en'">English</option>
+  <option [value]="'el'">Ελληνικά</option>
+</select>
