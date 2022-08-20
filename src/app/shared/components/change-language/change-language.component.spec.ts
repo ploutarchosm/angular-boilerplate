@@ -4,6 +4,7 @@ import { ChangeLanguageComponent } from '@shared/components/change-language/chan
 import { LanguageService } from '@shared/services/language.service';
 import { STORE_PREFIX } from '@storage/models/storage.token';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 describe('ChangeLanguageComponent', () => {
   let component: ChangeLanguageComponent;
@@ -33,5 +34,17 @@ describe('ChangeLanguageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should test onChange method', () => {
+    const select: HTMLSelectElement = fixture.debugElement.query(
+      By.css('[data-qa="select-language"')
+    ).nativeElement;
+    select.selectedIndex = 1;
+
+    select.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+
+    expect(component.selectedLanguge).toBe('el');
   });
 });

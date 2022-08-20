@@ -1,4 +1,7 @@
-<select [(ngModel)]="selectedLanguge" (ngModelChange)="onChange($event)">
+<select
+  [(ngModel)]="selectedLanguge"
+  (ngModelChange)="onChange($event)"
+  data-qa="select-language">
   <option [value]="'en'">English</option>
   <option [value]="'el'">Ελληνικά</option>
 </select>

@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from '@app/app.component';
 import { StorageModule } from '@storage/storage.module';
@@ -11,6 +11,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LANGUAGE_PREFIX } from '@shared/models/language.token';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async () => {
     let localStorage: LocalStoreService;
     let sessionStorage: SessionStoreService;
@@ -41,18 +44,10 @@ describe('AppComponent', () => {
 
     localStorage = TestBed.inject(LocalStoreService);
     sessionStorage = TestBed.inject(SessionStoreService);
-  });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'angular-boilerplate'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-boilerplate');
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should set localStorage key `testKey` and value `testValue`', () => {

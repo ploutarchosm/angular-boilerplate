@@ -4,6 +4,7 @@ import { ThemeService } from '@theme/services/theme.service';
 import { ChangeThemeComponent } from '@shared/components/change-theme/change-theme.component';
 import { STORE_PREFIX } from '@storage/models/storage.token';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 describe('ChangeThemeComponent', () => {
   let component: ChangeThemeComponent;
@@ -34,5 +35,17 @@ describe('ChangeThemeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should test onChange method', () => {
+    const select: HTMLSelectElement = fixture.debugElement.query(
+      By.css('[data-qa="select-theme"')
+    ).nativeElement;
+    select.selectedIndex = 1;
+
+    select.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+
+    expect(component.selectedTheme).toBe('dark');
   });
 });

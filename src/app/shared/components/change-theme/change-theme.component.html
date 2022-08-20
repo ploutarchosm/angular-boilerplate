@@ -1,4 +1,7 @@
-<select [(ngModel)]="selectedTheme" (ngModelChange)="onChange($event)">
+<select
+  [(ngModel)]="selectedTheme"
+  (ngModelChange)="onChange($event)"
+  data-qa="select-theme">
   <option [value]="'light'">Light</option>
   <option [value]="'dark'">Dark</option>
 </select>
