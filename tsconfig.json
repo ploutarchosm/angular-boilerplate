@@ -23,10 +23,10 @@
     ],
     "paths": {
       "@app/*": ["app/*"],
-      "@core/*": ["app/core/*"],
       "@shared/*": ["app/shared/*"],
-      "@theme/*": ["app/modules/theme/*"],
-      "@storage/*": ["app/modules/storage/*"],
+      "@theme/*": ["app/theme/*"],
+      "@storage/*": ["app/storage/*"],
+      "@helpers/*": ["app/helpers/*"],
       "@env/*": ["environments/*"]
     }
   },

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Theme } from '@app/modules/theme/interfaces/theme';
+import { Theme } from '@theme/interfaces/theme';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { THEME_PREFIX } from '@theme/models/theme.token';

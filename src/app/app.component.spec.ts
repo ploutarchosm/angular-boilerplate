@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from '@app/app.component';
-import { StorageModule } from '@storage/storage.module';
 import { LocalStoreService } from '@storage/services/local-store.service';
 import { SessionStoreService } from '@storage/services/session-store.service';
 import { STORE_PREFIX } from '@storage/models/storage.token';
@@ -19,12 +18,7 @@ describe('AppComponent', () => {
     let sessionStorage: SessionStoreService;
 
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        TranslateModule.forRoot(),
-        StorageModule.forRoot(),
-        SharedModule,
-      ],
+      imports: [RouterTestingModule, TranslateModule.forRoot(), SharedModule],
       declarations: [AppComponent],
       providers: [
         {
