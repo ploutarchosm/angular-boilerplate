@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { ThemeService } from '@theme/services/theme.service';
+import { ApplicationActions } from '@store/actions';
+import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { ApplicationState } from '@store/state';
 
 @Component({
   selector: 'app-change-theme',
@@ -7,13 +10,13 @@ import { ThemeService } from '@theme/services/theme.service';
   styleUrls: ['./change-theme.component.scss'],
 })
 export class ChangeThemeComponent {
-  selectedTheme!: string;
+  selectedTheme$: Observable<string> = this.store.select<string>(
+    state => state.app.theme
+  );
 
-  constructor(private themeService: ThemeService) {
-    this.selectedTheme = this.themeService.themeValue;
-  }
+  constructor(private store: Store) {}
 
   onChange(val: string) {
-    this.themeService.changeTheme(val);
+    this.store.dispatch(new ApplicationActions.ChangeTheme(val));
   }
 }

@@ -1,37 +1,26 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { THEME_PREFIX } from '@theme/models/theme.token';
-import { ThemeService } from '@theme/services/theme.service';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeThemeComponent } from '@shared/components/change-theme/change-theme.component';
-import { STORE_PREFIX } from '@storage/models/storage.token';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { NgxsModule, Store } from '@ngxs/store';
+import { ApplicationState } from '@store/state';
 
 describe('ChangeThemeComponent', () => {
   let component: ChangeThemeComponent;
   let fixture: ComponentFixture<ChangeThemeComponent>;
-  let service: ThemeService;
+  let store: Store;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [FormsModule],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [FormsModule, NgxsModule.forRoot([ApplicationState])],
       declarations: [ChangeThemeComponent],
-      providers: [
-        {
-          provide: STORE_PREFIX,
-          useValue: 'pm.',
-        },
-        {
-          provide: THEME_PREFIX,
-          useValue: 'light',
-        },
-      ],
     }).compileComponents();
 
-    service = TestBed.inject(ThemeService);
+    store = TestBed.inject(Store);
     fixture = TestBed.createComponent(ChangeThemeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -46,6 +35,7 @@ describe('ChangeThemeComponent', () => {
     select.dispatchEvent(new Event('change'));
     fixture.detectChanges();
 
-    expect(component.selectedTheme).toBe('dark');
+    const lightBlue = store.selectSnapshot(state => state.app.theme);
+    expect(lightBlue).toBe('dark');
   });
 });

@@ -24,9 +24,8 @@
     "paths": {
       "@app/*": ["app/*"],
       "@shared/*": ["app/shared/*"],
-      "@theme/*": ["app/theme/*"],
-      "@storage/*": ["app/storage/*"],
       "@helpers/*": ["app/helpers/*"],
+      "@store/*": ["app/store/*"],
       "@env/*": ["environments/*"]
     }
   },

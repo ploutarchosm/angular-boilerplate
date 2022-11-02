@@ -1,5 +1,5 @@
 <select
-  [(ngModel)]="selectedLanguge"
+  [ngModel]="selectedLanguge$ | async"
   (ngModelChange)="onChange($event)"
   data-qa="select-language">
   <option [value]="'en'">English</option>

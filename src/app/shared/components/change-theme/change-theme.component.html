@@ -1,5 +1,5 @@
 <select
-  [(ngModel)]="selectedTheme"
+  [ngModel]="selectedTheme$ | async"
   (ngModelChange)="onChange($event)"
   data-qa="select-theme">
   <option [value]="'light'">Light</option>

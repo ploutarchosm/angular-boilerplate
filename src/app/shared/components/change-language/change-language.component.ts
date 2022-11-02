@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { LanguageService } from '@shared/services/language.service';
+import { Store } from '@ngxs/store';
+import { ApplicationActions } from '@app/store/actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-change-language',
@@ -7,13 +9,13 @@ import { LanguageService } from '@shared/services/language.service';
   styleUrls: ['./change-language.component.scss'],
 })
 export class ChangeLanguageComponent {
-  selectedLanguge!: string;
+  selectedLanguge$: Observable<string> = this.store.select<string>(
+    state => state.app.language
+  );
 
-  constructor(private languageService: LanguageService) {
-    this.selectedLanguge = this.languageService.languageValue;
-  }
+  constructor(private store: Store) {}
 
   onChange(val: string) {
-    this.languageService.changeLanguage(val);
+    this.store.dispatch(new ApplicationActions.ChangeLanguage(val));
   }
 }
