@@ -27,7 +27,8 @@
       "@helpers/*": ["app/helpers/*"],
       "@store/*": ["app/store/*"],
       "@env/*": ["environments/*"]
-    }
+    },
+    "strictPropertyInitialization": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
