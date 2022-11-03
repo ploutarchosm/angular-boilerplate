@@ -1,6 +1,12 @@
 <div class="padding-4">
-  <h1>{{ 'title' | translate }}</h1>
-  <hr />
-  <app-change-theme></app-change-theme>
-  <app-change-language></app-change-language>
+  <div class="d-flex">
+    <h1 class="flex-grow-1">{{ 'title' | translate }}</h1>
+    <div class="actions">
+      <app-change-theme></app-change-theme>
+      <app-change-language></app-change-language>
+    </div>
+  </div>
+  <hr style="margin-bottom: 2rem" />
+
+  more
 </div>

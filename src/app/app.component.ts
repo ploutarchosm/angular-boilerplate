@@ -6,7 +6,6 @@ import {
   RendererFactory2,
 } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
 import { AppStateModel } from '@store/store.model';
 import { TranslateService } from '@ngx-translate/core';
 import { DOCUMENT } from '@angular/common';
@@ -18,10 +17,7 @@ import { DOCUMENT } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   private renderer: Renderer2;
-  title = 'angular-boilerplate';
-  state$: Observable<AppStateModel> = this.store.select<AppStateModel>(
-    state => state.app
-  );
+  state$ = this.store.select<AppStateModel>(state => state.app);
 
   constructor(
     rendererFactory: RendererFactory2,

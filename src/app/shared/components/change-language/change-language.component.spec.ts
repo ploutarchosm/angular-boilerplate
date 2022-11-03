@@ -1,9 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+  waitForAsync,
+} from '@angular/core/testing';
 import { ChangeLanguageComponent } from '@shared/components/change-language/change-language.component';
 import { FormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 import { NgxsModule, Store } from '@ngxs/store';
 import { ApplicationState } from '@store/state';
+import { selectOption } from '@app/__tests__/helper.test';
 
 describe('ChangeLanguageComponent', () => {
   let component: ChangeLanguageComponent;
@@ -26,13 +32,9 @@ describe('ChangeLanguageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should test onChange method', () => {
-  //   const select: HTMLSelectElement = fixture.debugElement.query(
-  //     By.css('[data-qa="select-language"')
-  //   ).nativeElement;
-  //   select.selectedIndex = 1;
-
-  //   select.dispatchEvent(new Event('change'));
-  //   fixture.detectChanges();
-  // });
+  it('should test onChange method', () => {
+    selectOption(fixture, 'select-language', 1);
+    const language = store.selectSnapshot(state => state.app.language);
+    expect(language).toBe('el');
+  });
 });

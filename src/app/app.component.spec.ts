@@ -7,11 +7,13 @@ import { NgxsModule } from '@ngxs/store';
 import { ApplicationState } from '@store/state';
 import { Store } from '@ngxs/store';
 import { ApplicationActions } from '@store/actions';
+import SpyInstance = jest.SpyInstance;
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let store: Store;
+  let storeSpy: SpyInstance;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NgxsModule, Store } from '@ngxs/store';
 import { ApplicationState } from '@store/state';
+import { find, selectOption } from '@app/__tests__/helper.test';
 
 describe('ChangeThemeComponent', () => {
   let component: ChangeThemeComponent;
@@ -27,15 +28,8 @@ describe('ChangeThemeComponent', () => {
   });
 
   it('should test onChange method', () => {
-    const select: HTMLSelectElement = fixture.debugElement.query(
-      By.css('[data-qa="select-theme"')
-    ).nativeElement;
-    select.selectedIndex = 1;
-
-    select.dispatchEvent(new Event('change'));
-    fixture.detectChanges();
-
-    const lightBlue = store.selectSnapshot(state => state.app.theme);
-    expect(lightBlue).toBe('dark');
+    selectOption(fixture, 'select-theme', 1);
+    const theme = store.selectSnapshot(state => state.app.theme);
+    expect(theme).toBe('dark');
   });
 });
